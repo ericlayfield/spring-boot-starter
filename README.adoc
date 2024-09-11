@@ -1,0 +1,97 @@
+:spring_boot_version: current
+:spring-boot: https://github.com/spring-projects/spring-boot
+:toc:
+:icons: font
+:source-highlighter: prettify
+:project_id: gs-spring-boot
+
+This the Spring Boot Student app.
+
+== Running the Application
+
+To run the application, run the following command in a terminal window (in the `complete`)
+directory:
+
+====
+
+Ensure Maven is installed and run the following command in a terminal window (in the `complete`)
+directory:
+
+====
+[source,text]
+----
+mvn spring-boot:run
+----
+====
+
+You should see output similar to the following:
+
+====
+[source,text]
+----
+Listing Spring Boot beans:
+application
+beanNameHandlerMapping
+defaultServletHandlerMapping
+dispatcherServlet
+embeddedServletContainerCustomizerBeanPostProcessor
+handlerExceptionResolver
+helloController
+httpRequestHandlerAdapter
+messageSource
+mvcContentNegotiationManager
+mvcConversionService
+mvcValidator
+org.springframework.boot.autoconfigure.MessageSourceAutoConfiguration
+org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration
+org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration
+org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration$DispatcherServletConfiguration
+org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration$EmbeddedTomcat
+org.springframework.boot.autoconfigure.web.ServerPropertiesAutoConfiguration
+org.springframework.boot.context.embedded.properties.ServerProperties
+org.springframework.context.annotation.ConfigurationClassPostProcessor.enhancedConfigurationProcessor
+org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor
+org.springframework.context.annotation.internalAutowiredAnnotationProcessor
+org.springframework.context.annotation.internalCommonAnnotationProcessor
+org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+org.springframework.context.annotation.internalRequiredAnnotationProcessor
+org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration
+propertySourcesBinder
+propertySourcesPlaceholderConfigurer
+requestMappingHandlerAdapter
+requestMappingHandlerMapping
+resourceHandlerMapping
+simpleControllerHandlerAdapter
+tomcatEmbeddedServletContainerFactory
+viewControllerHandlerMapping
+----
+
+====
+[source,text]
+----
+$ curl http://localhost:8080
+Greetings from Student App!
+
+====
+
+The actuator exposes the following:
+
+* http://localhost:8080/actuator/health[actuator/health]
+* http://localhost:8080/actuator[actuator]
+
+NOTE: There is also an `/actuator/shutdown` endpoint, but, by default, it is visible only
+through JMX. To http://docs.spring.io/spring-boot/docs/{spring_boot_version}/reference/htmlsingle/#production-ready-endpoints-enabling-endpoints[enable it as an HTTP endpoint], add
+`management.endpoint.shutdown.enabled=true` to your `application.properties` file
+and expose it with `management.endpoints.web.exposure.include=health,info,shutdown`.
+However, you probably should not enable the shutdown endpoint for a publicly available
+application.
+
+You can check the health of the application by running the following command:
+
+====
+[source,bash]
+----
+$ curl http://localhost:8080/actuator/health
+{"status":"UP"}
+----
+====

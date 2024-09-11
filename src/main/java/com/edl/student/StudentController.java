@@ -1,14 +1,14 @@
-package com.starter.springboot;
+package com.edl.student;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloController {
+public class StudentController {
 
 	@GetMapping("/")
 	public String index() {
-		return "Greetings from Spring Boot Starter!";
+		return "Greetings from Student App!";
 	}
 
 }

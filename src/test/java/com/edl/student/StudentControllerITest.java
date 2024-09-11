@@ -1,4 +1,4 @@
-package com.starter.springboot;
+package com.edl.student;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,14 +11,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 //start an embedded server
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HelloControllerITest {
+public class StudentControllerITest {
 
 	@Autowired
 	private TestRestTemplate template;
 
     @Test
-    public void getHello() throws Exception {
+    public void getGreetings() throws Exception {
         ResponseEntity<String> response = template.getForEntity("/", String.class);
-        assertThat(response.getBody()).isEqualTo("Greetings from Spring Boot Starter!");
+        assertThat(response.getBody()).isEqualTo("Greetings from Student App!");
     }
 }

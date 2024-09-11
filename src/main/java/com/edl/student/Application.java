@@ -1,4 +1,4 @@
-package com.starter.springboot;
+package com.edl.student;
 
 import java.util.Arrays;
 
