@@ -6,6 +6,7 @@
 :project_id: gs-spring-boot
 
 This the Spring Boot Student app.
+Note: A Jenkins build is triggered from a commit using serveo exposed webhook
 
 == Running the Application
 

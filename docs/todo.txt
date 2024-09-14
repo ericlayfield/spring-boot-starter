@@ -1,0 +1,11 @@
+create initial project - 09/11/2024
+
+deploy initial to AWS
+
+create data models and high level architecture
+
+define REST contract for student management, CRUD based service
+
+add component and behavior level tests for student
+
+set up a Jenkins CI/CD pipeline
