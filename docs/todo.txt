@@ -7,5 +7,14 @@ create data models and high level architecture
 define REST contract for student management, CRUD based service
 
 add component and behavior level tests for student
+initializes 09/14/2024
 
-set up a Jenkins CI/CD pipeline
+set up a Jenkins CI/CD pipeline - 09/14/2024
+
+User Stories
+------------
+
+UserStory01:
+As a student administrator
+I want to add an individual student by a student id
+So that they are uniquely identified and persisted
