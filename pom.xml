@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>spring-boot-complete</artifactId>
+	<artifactId>spring-boot-student</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-boot-complete</name>
 	<description>Student Application</description>
@@ -40,6 +40,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>2.3.230</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.junit.platform</groupId>
 			<artifactId>junit-platform-suite</artifactId>
 			<version>1.11.0</version>
@@ -57,6 +64,10 @@
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit-platform-engine</artifactId>
 			<version>${cucumber.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
 		<!-- end::tests[] -->
