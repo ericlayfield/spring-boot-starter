@@ -1,54 +1,52 @@
-package com.edl.student;
+package com.edl.student.model;
 
-import com.edl.student.model.Student;
-import com.edl.student.model.StudentRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
+import static java.time.LocalDate.of;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
 @DataJpaTest
 public class StudentTest {
-    
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
+    public static final LocalDate BIRTH_DATE = of(2010, 11, 1);
     @Autowired
     private StudentRepository studentRepository;
 
     @Test
     @DisplayName("adding a student to the student repository")
-    public void addStudent() throws ParseException {
+    public void addStudent() {
         Student student = createStudent();
-        assertStudent(student);
+        assertStudent(student, "Ralph", "Thomas", "RalphThomas@gmail.com", BIRTH_DATE);
 
         studentRepository.save(student);
         student = studentRepository.findById(student.getId()).get();
-        assertStudent(student);
+        assertStudent(student, "Ralph", "Thomas", "RalphThomas@gmail.com", BIRTH_DATE);
         assertTrue(student.getId()>0);
 
     }
 
-    private void assertStudent(Student student) throws ParseException {
+    public static void assertStudent(Student student, String firstName, String lastName, String email, LocalDate birthDate) {
         assertNotNull(student.getId());
-        assertEquals("Ralph", student.getFirstName());
-        assertEquals("Thomas", student.getLastName());
-        assertEquals("RalphThomas@gmail.com", student.getEmail());
-        assertEquals(sdf.parse("03/08/2012"), student.getBirthDate());
+        assertEquals(firstName, student.getFirstName());
+        assertEquals(lastName, student.getLastName());
+        assertEquals(email, student.getEmail());
+        assertEquals(birthDate, student.getBirthDate());
+        System.out.println(student);
     }
 
-    private Student createStudent() throws ParseException {
+    private Student createStudent() {
         Student student = new Student();
         student.setFirstName("Ralph");
         student.setLastName("Thomas");
         student.setEmail("RalphThomas@gmail.com");
-        student.setBirthDate(sdf.parse("03/08/2012"));
+        student.setBirthDate(BIRTH_DATE);
         return student;
     }
 

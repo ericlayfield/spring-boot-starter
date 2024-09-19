@@ -4,8 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Objects;
 
+//TODO add builder pattern
 @Entity
 public class Student {
 
@@ -13,7 +15,7 @@ public class Student {
     private String firstName;
     private String lastName;
     private String email;
-    private Date birthDate;
+    private LocalDate birthDate;
 
     public Long getId() {
         return id;
@@ -33,7 +35,6 @@ public class Student {
         return lastName;
     }
 
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -41,13 +42,21 @@ public class Student {
         return email;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
+    @Override
+    public String toString() {
+        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName +
+                ", email=" + email + ", birthDate=" + birthDate + "]";
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, birthDate);
+    }
 }
