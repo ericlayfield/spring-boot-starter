@@ -23,18 +23,20 @@ public class LoadStudents {
     CommandLineRunner run(StudentRepository studentRepository) {
         return args -> {
             log.info("Loading students:");
-            studentRepository.save (Builder.of(Student::new)
-                    .with(Student::setFirstName, "Sam")
-                    .with(Student::setLastName, "Smith")
-                    .with(Student::setEmail, "sammysmith@live.com")
-                    .with(Student::setBirthDate, of(2012,3,12))
-                    .build());
-            studentRepository.save (Builder.of(Student::new)
-                    .with(Student::setFirstName, "Ralph")
-                    .with(Student::setLastName, "Thomas")
-                    .with(Student::setEmail, "RalphThomas@gmail.com")
-                    .with(Student::setBirthDate, of(2010,11,1))
-                    .build());
+            log.info("loading: " +
+                studentRepository.save (Builder.of(Student::new)
+                        .with(Student::setFirstName, "Sam")
+                        .with(Student::setLastName, "Smith")
+                        .with(Student::setEmail, "sammysmith@live.com")
+                        .with(Student::setBirthDate, of(2012,3,12))
+                        .build()));
+            log.info("loading: " +
+                studentRepository.save (Builder.of(Student::new)
+                        .with(Student::setFirstName, "Ralph")
+                        .with(Student::setLastName, "Thomas")
+                        .with(Student::setEmail, "RalphThomas@gmail.com")
+                        .with(Student::setBirthDate, of(2010,11,1))
+                        .build()));
             log.info("student repository count: " + studentRepository.count());
         };
     }

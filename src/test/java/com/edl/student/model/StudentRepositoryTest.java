@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
 @DataJpaTest
-public class StudentTest {
+public class StudentRepositoryTest {
 
     public static final LocalDate BIRTH_DATE = of(2010, 11, 1);
     @Autowired
@@ -30,6 +30,18 @@ public class StudentTest {
         assertStudent(student, "Ralph", "Thomas", "RalphThomas@gmail.com", BIRTH_DATE);
         assertTrue(student.getId()>0);
 
+    }
+
+    @Test
+    @DisplayName("validate the StudentNotFoundException")
+    public void validateStudentNotFoundException() {
+        StudentNotFoundException thrown = assertThrows(
+                StudentNotFoundException.class,
+                () -> {
+                    long id = 111;
+                    studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException("Student not found + id"));
+                }
+        );
     }
 
     public static void assertStudent(Student student, String firstName, String lastName, String email, LocalDate birthDate) {

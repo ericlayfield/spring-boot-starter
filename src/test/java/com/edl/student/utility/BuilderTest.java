@@ -4,7 +4,7 @@ import com.edl.student.model.Student;
 import com.edl.student.ultiliy.Builder;
 import org.junit.jupiter.api.Test;
 
-import static com.edl.student.model.StudentTest.assertStudent;
+import static com.edl.student.model.StudentRepositoryTest.assertStudent;
 import static java.time.LocalDate.of;
 
 public class BuilderTest {
