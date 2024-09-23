@@ -1,7 +1,6 @@
 package com.edl.student.utility;
 
 import com.edl.student.model.Student;
-import com.edl.student.ultiliy.Builder;
 import org.junit.jupiter.api.Test;
 
 import static com.edl.student.model.StudentRepositoryTest.assertStudent;

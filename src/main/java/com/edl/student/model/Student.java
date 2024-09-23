@@ -7,7 +7,6 @@ import jakarta.persistence.Id;
 import java.time.LocalDate;
 import java.util.Objects;
 
-//TODO add builder pattern
 @Entity
 public class Student {
 

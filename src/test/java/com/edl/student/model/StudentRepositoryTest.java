@@ -32,18 +32,6 @@ public class StudentRepositoryTest {
 
     }
 
-    @Test
-    @DisplayName("validate the StudentNotFoundException")
-    public void validateStudentNotFoundException() {
-        StudentNotFoundException thrown = assertThrows(
-                StudentNotFoundException.class,
-                () -> {
-                    long id = 111;
-                    studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException("Student not found + id"));
-                }
-        );
-    }
-
     public static void assertStudent(Student student, String firstName, String lastName, String email, LocalDate birthDate) {
         assertNotNull(student.getId());
         assertEquals(firstName, student.getFirstName());

@@ -1,4 +1,4 @@
-package com.edl.student.ultiliy;
+package com.edl.student.utility;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;

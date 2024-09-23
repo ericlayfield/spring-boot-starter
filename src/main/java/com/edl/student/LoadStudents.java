@@ -2,7 +2,7 @@ package com.edl.student;
 
 import com.edl.student.model.Student;
 import com.edl.student.model.StudentRepository;
-import com.edl.student.ultiliy.Builder;
+import com.edl.student.utility.Builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
