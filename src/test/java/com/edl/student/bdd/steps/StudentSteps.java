@@ -6,7 +6,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StudentSteps {
     private static final String URI_BASE = "http://localhost:8080/students";
-    private RestClient restClient = RestClient.create();
+    private final RestClient restClient = RestClient.create();
     private Long studentId;
     private Student student;
 

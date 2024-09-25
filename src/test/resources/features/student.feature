@@ -19,3 +19,4 @@ Feature: Student CRUD
     Given student id is 3
     When student does not exist
     Then student is added
+    And student exists
