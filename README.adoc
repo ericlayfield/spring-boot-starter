@@ -43,7 +43,6 @@ Ensure Maven is installed and run the following command in a terminal window (in
 directory:
 
 ====
-[source,text]
 ----
 mvn spring-boot:run
 ----

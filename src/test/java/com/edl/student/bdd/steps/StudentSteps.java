@@ -6,17 +6,22 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 import static java.time.LocalDate.parse;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StudentSteps {
-    private static final String URI_BASE = "http://localhost:8080/students";
+    private static final String URI_BASE = "http://localhost:8080";
+    public static final String HEALTH = URI_BASE + "/actuator/health";
+    private static final String STUDENTS = URI_BASE + "/students";
+    public static final String STUDENTS_ID = STUDENTS + "/{id}";
     private final RestClient restClient = RestClient.create();
     private Long studentId;
     private Student student;
@@ -38,8 +43,9 @@ public class StudentSteps {
     public void studentDoesNotExist() {
         assertThrows(
                 HttpClientErrorException.class, () -> {
-                    restClient.get()
-                            .uri(URI_BASE + "/{id}", studentId)
+                    restClient
+                            .get()
+                            .uri(STUDENTS_ID, studentId)
                             .retrieve()
                             .body(String.class);
                 }
@@ -48,8 +54,9 @@ public class StudentSteps {
 
     @Then("student is added")
     public void studentIsAdded() {
-        ResponseEntity<Void> response = restClient.post()
-                .uri(URI_BASE)
+        ResponseEntity<Void> response = restClient
+                .post()
+                .uri(STUDENTS)
                 .body(student)
                 .retrieve()
                 .toBodilessEntity();
@@ -58,8 +65,9 @@ public class StudentSteps {
 
     @When("student exists")
     public void studentExist() {
-        student = restClient.get()
-                .uri(URI_BASE + "/{id}", studentId)
+        student = restClient
+                .get()
+                .uri(STUDENTS_ID, studentId)
                 .retrieve()
                 .body(Student.class);
     }
@@ -80,6 +88,11 @@ public class StudentSteps {
         assertEquals(parse(birthDate, formatter), student.getBirthDate());
     }
 
+    @And("student has email {string}")
+    public void studentHasEmail(String email) {
+        assertEquals(email, student.getEmail());
+    }
+
     @Then("student first name is {string}")
     public void studentFirstNameIs(String firstName) {
         student = new Student();
@@ -94,5 +107,33 @@ public class StudentSteps {
     @And("student birth date is {string}")
     public void studentBirthDateIs(String birthDate) {
         student.setBirthDate(parse(birthDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+    }
+
+    @And("student email is {string}")
+    public void studentEmailIs(String email) {
+        student.setEmail(email);
+    }
+
+    @Given("the service is running")
+    public void theServiceIsRunning() {
+        Map response =
+                restClient
+                    .get()
+                    .uri(HEALTH)
+                    .retrieve()
+                    .body(Map.class);
+        assertNotNull(response);
+        assertEquals("UP", response.get("status"));
+    }
+
+    @And("student {long} is updated")
+    public void studentIsUpdated(Long studentId) {
+        ResponseEntity<Void> response = restClient
+                .put()
+                .uri(STUDENTS + "/" + studentId )
+                .body(student)
+                .retrieve()
+                .toBodilessEntity();
+        assertTrue(response.getStatusCode().is2xxSuccessful());
     }
 }

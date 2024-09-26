@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
+@RequestMapping("/students")
 @RestController
 public class StudentController {
 
@@ -20,22 +22,28 @@ public class StudentController {
 		this.studentRepository = studentRepository;
 	}
 
-	@GetMapping("/students")
+	@GetMapping()
 	List<Student> all() {
 		log.info("get all students");
 		return studentRepository.findAll();
 	}
 
-	@GetMapping("/students/{id}")
+	@GetMapping("/{id}")
 	Student one(@PathVariable Long id) {
 		log.info("get student with id {}", id);
 		return studentRepository.findById(id)
 				.orElseThrow(() -> createStudentNotFoundException(id));
 	}
 
-	@PostMapping("/students")
+	@PostMapping()
 	Student create(@RequestBody Student student) {
 		log.info("create student {}", student);
+		return studentRepository.save(student);
+	}
+
+	@PutMapping("/{id}")
+	Student update(@PathVariable Long id, @RequestBody Student student) {
+		log.info("update student id {}", id);
 		return studentRepository.save(student);
 	}
 
