@@ -5,10 +5,34 @@
 :source-highlighter: prettify
 :project_id: gs-spring-boot
 
-This the Spring Boot Student app.
-Note: A Jenkins build is triggered from a commit using serveo exposed webhook.
+== Spring Boot Student Service
 
-== Running the Application
+The Student service provide basic Create, Read, Update and Delete (CRUD) functionality for the management of student records.
+
+NOTE: A Jenkins build is triggered from a commit using serveo exposed webhook.
+
+== Running the Tests
+
+The tests are broken out into unit level tests and service level component tests.
+The former uses JUnit exclusively and basically at the level of each working class.
+The latter uses Gherkin/Cucumber exclusively and basically at the REST API level.
+
+====
+
+From the command line, the following command will:
+
+- clean the target directory
+- compile the service and its tests
+- run the unit tests using the maven surefire-plugin with reports generated
+- package the service into a jar
+- verifies the Gherkin/Cucumber scenarios using the maven failsafe-plugin with reports generated with the service actually started and stop before and after the scenarios are validated. Report results are found in the target directory.
+
+----
+mvn clean install
+----
+====
+
+== Running the Service
 
 To run the application, run the following command in a terminal window (in the `complete`)
 directory:
