@@ -13,10 +13,12 @@ Feature: Student CRUD
     |1  |Sam       |Smith    |2012-03-12|
     |2  |Ralph     |Thomas   |2010-11-01|
 
-
   @RegressionTest
   Scenario: Student successfully added
     Given student id is 3
     When student does not exist
-    Then student is added
+    Then student first name is "Steve"
+    And student last name is "Miller"
+    And student birth date is "2015-09-30"
+    And student is added
     And student exists

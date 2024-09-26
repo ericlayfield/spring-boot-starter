@@ -6,14 +6,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static java.time.LocalDate.parse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StudentSteps {
     private static final String URI_BASE = "http://localhost:8080/students";
@@ -48,7 +48,12 @@ public class StudentSteps {
 
     @Then("student is added")
     public void studentIsAdded() {
-
+        ResponseEntity<Void> response = restClient.post()
+                .uri(URI_BASE)
+                .body(student)
+                .retrieve()
+                .toBodilessEntity();
+        assertTrue(response.getStatusCode().is2xxSuccessful());
     }
 
     @When("student exists")
@@ -72,7 +77,22 @@ public class StudentSteps {
     @And("student has birth date {string}")
     public void studentHasBirthDate(String birthDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        assertEquals(LocalDate.parse(birthDate, formatter), student.getBirthDate());
+        assertEquals(parse(birthDate, formatter), student.getBirthDate());
     }
 
+    @Then("student first name is {string}")
+    public void studentFirstNameIs(String firstName) {
+        student = new Student();
+        student.setFirstName(firstName);
+    }
+
+    @And("student last name is {string}")
+    public void studentLastNameIs(String lastName) {
+        student.setLastName(lastName);
+    }
+
+    @And("student birth date is {string}")
+    public void studentBirthDateIs(String birthDate) {
+        student.setBirthDate(parse(birthDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+    }
 }

@@ -17,6 +17,7 @@
 	<properties>
 		<java.version>22</java.version>
 		<cucumber.version>7.18.0</cucumber.version>
+		<skip>false</skip>
 	</properties>
 
 	<dependencies>
@@ -83,6 +84,9 @@
 						<goals>
 							<goal>start</goal>
 						</goals>
+						<configuration>
+							<skip>${skip}</skip>
+						</configuration>
 					</execution>
 					<execution>
 
@@ -92,6 +96,9 @@
 						<goals>
 							<goal>stop</goal>
 						</goals>
+						<configuration>
+							<skip>${skip}</skip>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -106,26 +113,15 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
+				<configuration/>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<configuration>
+					<skip>${skip}</skip>
 					<test>IntegrationSuite</test>
 				</configuration>
-				<executions>
-					<execution>
-						<id>run-integration-tests</id>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
         </plugins>
 	</build>
