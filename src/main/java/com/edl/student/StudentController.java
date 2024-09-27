@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RequestMapping("/students")
@@ -43,8 +42,14 @@ public class StudentController {
 
 	@PutMapping("/{id}")
 	Student update(@PathVariable Long id, @RequestBody Student student) {
-		log.info("update student id {}", id);
+		log.info("update student with id {}", id);
 		return studentRepository.save(student);
+	}
+
+	@DeleteMapping("/{id}")
+	void delete(@PathVariable Long id) {
+		log.info("delete student with id {}", id);
+		studentRepository.deleteById(id);
 	}
 
 	private static StudentNotFoundException createStudentNotFoundException(Long id) {

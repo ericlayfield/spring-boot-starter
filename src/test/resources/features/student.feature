@@ -3,7 +3,6 @@ Feature: Validate the Student service CRUD is valid thru the REST API
   Background:
     Given the service is running
 
-  @Regression
   Scenario Outline: Student successfully found
     Given student id is <id>
     When student exists
@@ -17,7 +16,6 @@ Feature: Validate the Student service CRUD is valid thru the REST API
     |1  |Sam       |Smith    |2012-03-12|sammysmith@live.com   |
     |2  |Ralph     |Thomas   |2010-11-01|RalphThomas@gmail.com |
 
-  @Regression
   Scenario: Student successfully added
     Given student id is 3
     When student does not exist
@@ -28,7 +26,6 @@ Feature: Validate the Student service CRUD is valid thru the REST API
     And student is added
     And student exists
 
-  @Regression
   Scenario: Student successfully updated
     Given student id is 1
     When student exists
@@ -36,3 +33,9 @@ Feature: Validate the Student service CRUD is valid thru the REST API
     And student 1 is updated
     And student exists
     And student has email "samsmith@gmail.com"
+
+  Scenario: Student successfully deleted
+    Given student id is 2
+    When student exists
+    Then student 2 is deleted
+    And student does not exist

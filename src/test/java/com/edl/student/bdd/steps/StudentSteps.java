@@ -136,4 +136,13 @@ public class StudentSteps {
                 .toBodilessEntity();
         assertTrue(response.getStatusCode().is2xxSuccessful());
     }
+
+    @Then("student {long} is deleted")
+    public void studentIsDeleted(Long studentId) {
+        ResponseEntity<Void> response = restClient
+                .delete()
+                .uri(STUDENTS + "/" + studentId)
+                .retrieve()
+                .toBodilessEntity();
+    }
 }
