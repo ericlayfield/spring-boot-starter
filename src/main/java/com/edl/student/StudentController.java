@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-@RequestMapping("/students")
 @RestController
+@RequestMapping("/students")
+@CrossOrigin
 public class StudentController {
 
 	private static final Logger log = LoggerFactory.getLogger(StudentController.class);
